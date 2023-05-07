@@ -5,19 +5,23 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://redux-todo-app-1usq.onrender.com/todo-storage/v1",
   }),
+  tagTypes: ['Post'],
   endpoints: (builder) => ({
     getTodoList: builder.query({
       query: () => "/",
+      providesTags: ['Post']
     }),
     getTodoItem: builder.query({
       query: (todoId) => `/${todoId}`,
+      invalidatesTags: ['Post']
     }),
     addTodo: builder.mutation({
       query: (newTodo) => ({
         url: "/",
         method: "POST",
-        body: newTodo,
+        body:{ content:newTodo},
       }),
+       invalidatesTags: ['Post']
     }),
     editTodo: builder.mutation({
       query: (updatedTodo) => ({
@@ -25,12 +29,14 @@ export const apiSlice = createApi({
         method: "PUT",
         body: updatedTodo,
       }),
+      invalidatesTags: ['Post']
     }),
     deleteTodo: builder.mutation({
       query: (todoId) => ({
         url: `/${todoId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ['Post']
     }),
   }),
 });

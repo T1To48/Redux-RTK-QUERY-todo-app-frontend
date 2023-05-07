@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
-import { addTodo } from "../features/todo/todoSlice.jsx";
+import { useAddTodoMutation } from "../features/api/apiSlice.jsx";
+
 const AddTodoItem = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [todoText, setTodoText] = useState("");
+  const [addTodo, { isLoading }] = useAddTodoMutation();
 
   const handleChange = (e) => {
     setTodoText(e.target.value);
   };
+
   const updateTodoList = () => {
-    dispatch(addTodo(todoText));
+    addTodo(todoText);
+
     navigate("/");
   };
 
