@@ -25,8 +25,10 @@ const EditTodo = () => {
 
   
   useEffect(() => {
-    console.log(todoItem)
-    // setTodoText(todoItem.content);
+    if(isSuccess){
+      setTodoText(todoItem.content);
+    }
+    
   }, [todoItem]);
 
   return (
