@@ -1,5 +1,5 @@
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import { TodoList, AddTodo, EditTodo } from "./pages/ExportsIndex.js";
+import { TodoList, TodoListTest,AddTodo, EditTodo, } from "./pages/ExportsIndex.js";
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
           <Route index element={<TodoList />} />
           <Route path="add-todo" element={<AddTodo />} />
           <Route path="edit-todo/:todoId" element={<EditTodo />} />
+          <Route path="all" element={<TodoListTest />} />
         </Route>
       </Routes>
     </BrowserRouter>
