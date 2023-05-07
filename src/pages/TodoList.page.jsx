@@ -1,35 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import { useGetTodoListQuery } from "../features/api/apiSlice.jsx";
 import TodoItem from "../components/TodoItem.jsx";
 
-import "../styles/todoList.css"
+import "../styles/todoList.css";
 const TodoList = () => {
   const navigate = useNavigate();
-  const { todoList } = useSelector((state) => state.todo);
+const {data: todoList,isLoading,isSuccess,isError,error}=useGetTodoListQuery()
 
-  return (
+useEffect(() => {console.log(todoList);},[todoList])
+
+if (isLoading) return <h1>LOADING...</h1>
+
+
+if (isSuccess) return (
     <div className="todo-list-container">
       <div className="add-todo-btn-container">
-        <button className="add-todo-btn" onClick={() => navigate("/add-todo")}> add todo</button>
+        <button className="add-todo-btn" onClick={() => navigate("/add-todo")}>
+          
+          add todo
+        </button>
       </div>
       <div className="todo-items-container">
         {todoList.map((todo) => (
-        <TodoItem key={todo.id} todoId={todo.id} text={todo.content} />
-      ))}
+          <TodoItem key={todo.id} todoId={todo.id} text={todo.content} />
+        ))}
       </div>
-      
     </div>
   );
+  
+if(isError) return <h1>{error.toString()}</h1>
 };
 
 export default TodoList;
-    // <div>
-    //   <div>
-    //     <button onClick={() => navigate("/add-todo")}> add todo</button>
-    //   </div>
-    //   {todoList.map((todo) => (
-    //     <TodoItem key={todo.id} todoId={todo.id} text={todo.content} />
-    //   ))}
-    // </div>

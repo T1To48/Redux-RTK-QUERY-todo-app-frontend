@@ -1,13 +1,8 @@
 import React,{useState} from 'react'
-import AddTodo from '../components/AddTodoItem.jsx'
-const AddTodoItem = () => {
+import AddTodoItem from '../components/AddTodoItem.jsx'
+const AddTodo = () => {
 
-  return (
-   
-{/* <AddTodoItem/> */}
-
-
-  )
+  return <AddTodoItem/> 
 }
 
 export default AddTodo
