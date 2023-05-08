@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetTodoListQuery } from "../features/api/apiSlice.jsx";
+import { useGetTodoListQuery,useDeleteTodoMutation } from "../features/api/apiSlice.jsx";
 import TodoItem from "../components/TodoItem.jsx";
 
 import "../styles/todoList.css";
 const TodoList = () => {
   const navigate = useNavigate();
-const {data: todoList,isLoading,isSuccess,isError,error}=useGetTodoListQuery()
+const {data: todoList,isLoading,isSuccess,isError,error,}=useGetTodoListQuery({refetchOnMountOrArgChange:true})
+const[deleteTodo,{isSuccess:delete_isSuccess}]=useDeleteTodoMutation()
+
+
+useEffect(() => {
+  if (delete_isSuccess){
+  }
+
+}, [delete_isSuccess])
 
 useEffect(() => {console.log(todoList);},[todoList])
 
@@ -22,8 +30,8 @@ if (isSuccess) return (
         </button>
       </div>
       <div className="todo-items-container">
-        {todoList.map((todo) => (
-          <TodoItem key={todo.id} todoId={todo.id} text={todo.content} />
+        {todoList.length>0&&todoList.map((todo) => (
+          <TodoItem key={todo.id} handleDelete={()=>deleteTodo(todo.id) } todoId={todo.id} text={todo.content} />
         ))}
       </div>
     </div>

@@ -7,7 +7,7 @@ const EditTodo = () => {
   const navigate = useNavigate();
   const { todoId } = useParams();
   const [todoText, setTodoText] = useState("");
-  const {data: todoItem,isLoading,isSuccess,isError,error}=useGetTodoItemQuery(todoId)
+  const {data: todoItem,isLoading,isSuccess,isError,error}=useGetTodoItemQuery(todoId,{refetchOnMountOrArgChange:true})
   const [editTodo]=useEditTodoMutation();
   const handleChange = (e) => {
     setTodoText(e.target.value);
