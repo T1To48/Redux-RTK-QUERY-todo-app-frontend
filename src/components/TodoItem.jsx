@@ -21,9 +21,3 @@ const TodoItem = ({ text, todoId ,handleDelete}) => {
 export default TodoItem;
 
 
-// <div>
-// <br /> <br />
-// <div>{text}</div>
-// <button onClick={() => navigate(`/edit-todo/${todoId}`)}>edit</button>
-// <button onClick={() => dispatch(deleteTodo(todoId))}>delete </button>
-// </div>
