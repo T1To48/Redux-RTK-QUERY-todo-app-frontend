@@ -8,18 +8,25 @@ export const apiSlice = createApi({
   tagTypes: ["Post"],
   endpoints: (builder) => ({
     getTodoList: builder.query({
-      query: () => "/",
+      query: () => ({
+       url: "/",
+       headers:{method:"getAll"}
+      }),
       providesTags: ["Post"],
     }),
     getTodoItem: builder.query({
-      query: (todoId) => `/${todoId}`,
+      query: (todoId) => ({
+       url: `/${todoId}`,
+       headers:{method:`get by id, ${todoId}`}
+      }),
       invalidatesTags: ["Post"],
     }),
     addTodo: builder.mutation({
       query: (newTodo) => ({
         url: "/",
         method: "POST",
-        body: { content: newTodo },
+        body: { content: newTodo, },
+        headers:{method:"newTodo"}
       }),
       invalidatesTags: ["Post"],
     }),
@@ -28,6 +35,7 @@ export const apiSlice = createApi({
         url: `/${updatedTodo.id}`,
         method: "PUT",
         body: { content: updatedTodo.content },
+        headers:{method:`edit Todo with id, ${todoId}`}
       }),
       invalidatesTags: ["Post"],
     }),
@@ -35,6 +43,7 @@ export const apiSlice = createApi({
       query: (todoId) => ({
         url: `/${todoId}`,
         method: "DELETE",
+        headers:{method:`delete todo with id ${todoId}`}
       }),
       invalidatesTags: ["Post"],
     }),
