@@ -20,7 +20,6 @@ export const todoSlice = createSlice({
       state.todoItem = getTodoById(todoId)[0];
     },
     addTodo: (state, action) => {
-      
       const newTodo = {
         id: genID(),
         content: action.payload,

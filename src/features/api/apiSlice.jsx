@@ -10,15 +10,15 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getTodoList: builder.query({
       query: () => ({
-       url: "/",
-       headers:{method:"getAll"}
+        url: "/",
+        headers: { method: "getAll" },
       }),
       providesTags: ["Post"],
     }),
     getTodoItem: builder.query({
       query: (todoId) => ({
-       url: `/${todoId}`,
-       headers:{method:`get by id, ${todoId}`}
+        url: `/${todoId}`,
+        headers: { method: `get by id, ${todoId}` },
       }),
       invalidatesTags: ["Post"],
     }),
@@ -26,8 +26,8 @@ export const apiSlice = createApi({
       query: (newTodo) => ({
         url: "/",
         method: "POST",
-        body: { content: newTodo, },
-        headers:{method:"newTodo"}
+        body: { content: newTodo },
+        headers: { method: "newTodo" },
       }),
       invalidatesTags: ["Post"],
     }),
@@ -36,7 +36,7 @@ export const apiSlice = createApi({
         url: `/${updatedTodo.id}`,
         method: "PUT",
         body: { content: updatedTodo.content },
-        headers:{method:`edit Todo with id, ${updatedTodo.id}`}
+        headers: { method: `edit Todo with id, ${updatedTodo.id}` },
       }),
       invalidatesTags: ["Post"],
     }),
@@ -44,7 +44,7 @@ export const apiSlice = createApi({
       query: (todoId) => ({
         url: `/${todoId}`,
         method: "DELETE",
-        headers:{method:`delete todo with id ${todoId}`}
+        headers: { method: `delete todo with id ${todoId}` },
       }),
       invalidatesTags: ["Post"],
     }),
